@@ -102,7 +102,7 @@ lvl 9 --> lvl 10
 http://natas9.natas.labs.overthewire.org/
 natas9
 W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
-// The point of this level is to proceed a PHP command injection
+// The point of this level is to process a PHP command injection
 a /dev/null; # // checks all the files in the folder
 // ; # allows to end the request and not get the whole dictionnary.txt back
 . /etc/natas_webpass/natas10 #
