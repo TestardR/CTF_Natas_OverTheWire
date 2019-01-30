@@ -63,3 +63,17 @@ http://natas6.natas.labs.overthewire.org/index-source.html
 $secret = "FOEIUWGHFEEUHOFUOIU";
 ?>
 // 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+
+lvl 7 --> lvl 8
+http://natas7.natas.labs.overthewire.org/
+natas6
+7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+// The point of this level is to test for Local File Inclusion
+// Cf. owasp.org : this vulnerability occurs due to thte use of user-supplied input without proper validation. 
+// It allows for directory taversal characters (such as dot-dot-slash) to be injected.
+// Typically : http://vulnerable_host/preview.php?file=example.html
+// We would then go for : http://vulnerable_host/preview.php?file=../../../../etc/passwd
+// Here, we have a hint : password for webuser natas8 is in /etc/natas_webpass/natas8
+
+
+DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
