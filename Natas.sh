@@ -106,5 +106,19 @@ W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
 a /dev/null; # // checks all the files in the folder
 // ; # allows to end the request and not get the whole dictionnary.txt back
 . /etc/natas_webpass/natas10 #
-// note a . with a space '. ' allows to espace and look for other files
+// note a . with a space '. ' means grep anything 
 nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+
+lvl 10 --> lvl 11
+http://natas10.natas.labs.overthewire.org/
+natas10
+nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+// The point of this level is to process a PHP command injection escaping a certain set of characters ;|&
+// in http://natas10.natas.labs.overthewire.org/index-source.html
+//
+if(preg_match('/[;|&]/',$key)) {
+        print "Input contains an illegal character!";
+    }
+// 
+// As such, we can keep the same logic as in lvl9 avoiding ';'
+U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
