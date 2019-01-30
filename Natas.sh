@@ -38,3 +38,13 @@ Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
 // Once done we can access the password
 // see natas4.py
 iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
+
+lvl 5 --> lvl 6
+http://natas5.natas.labs.overthewire.org/
+natas5
+iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
+// The point of this level is to set the cookie in the session to 1
+// define the cookie parameters you want to change cookies = { 'loggedin': '1'}
+// to access a cookie go for resquests.Session()
+// to send the cookie to your GET request : session.get(url, cookies = cookies)
+aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1</div>

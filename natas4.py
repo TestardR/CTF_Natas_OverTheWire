@@ -14,4 +14,4 @@ response = requests.get(url, auth=(username, password), headers=headers)
 content = response.text
 
 print(content)
-print(re.findall('The password for natas5 is (.*)', content))
+print(re.findall('The password for natas5 is(.*)', content))
