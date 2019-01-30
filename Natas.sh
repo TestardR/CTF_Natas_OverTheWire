@@ -22,3 +22,11 @@ ctrl u
 atas2.natas.labs.overthewire.org/files
 http://natas2.natas.labs.overthewire.org/files/users.txt
 sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+
+lvl 3 --> lvl 4
+http://natas3.natas.labs.overthewire.org/
+sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+http://natas3.natas.labs.overthewire.org/robots.txt
+http://natas3.natas.labs.overthewire.org/s3cr3t/
+http://natas3.natas.labs.overthewire.org/s3cr3t/users.txt
+Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
