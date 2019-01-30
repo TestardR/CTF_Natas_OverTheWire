@@ -30,3 +30,11 @@ http://natas3.natas.labs.overthewire.org/robots.txt
 http://natas3.natas.labs.overthewire.org/s3cr3t/
 http://natas3.natas.labs.overthewire.org/s3cr3t/users.txt
 Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+
+lvl 4 --> lvl 5
+http://natas4.natas.labs.overthewire.org/
+Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+// The point of this level is to set the Referer in the Headers to http://natas5.natas.labs.overthewire.org/
+// Once done we can access the password
+// see natas4.py
+iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
