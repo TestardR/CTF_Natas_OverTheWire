@@ -122,3 +122,60 @@ if(preg_match('/[;|&]/',$key)) {
 // 
 // As such, we can keep the same logic as in lvl9 avoiding ';'
 U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+
+lvl 11 --> lvl 12
+http://natas11.natas.labs.overthewire.org/
+natas11
+U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+// The point of this level is to access $data, which is inside a cookie => session.cookies
+// In python print(session.cookies['data']) or ctrl shift j => application => cookie 
+// Then we have to reverse ingineer 'data'
+// => $tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE["data"]))
+ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw%3D
+// looking at %3D we know that it is a urlencoded character
+urllib.parse.unquote(session.cookies['data'])
+// then base64
+base64.b64decode(urllib.parse.unquote(session.cookies['data']))
+b'\nUK"\x1e\x00H+\x02\x04O%\x03\x13\x1apS\x19Wh]UZ-\x12\x18T%\x03U\x02hR\x11^,\x17\x11^h\x0c'
+// then we see from the code that run the code through xor_encrypt() 
+function xor_encrypt($in) {
+    $key = '<censored>';
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+    $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+// xor_encryption logic : 
+plaintext ^ key = ciphertext
+plaintext ^ciphertext = key
+// lets figure out the key as we have both the plaintext and the ciphertext
+plaintext = json_encode($defaultdata) = {"showpassword":"no","bgcolor":"#ffffff"}
+cyphertext (in php) = hex2bin(b'0a554b221e00482b02044f2503131a70531957685d555a2d121854250355026852115e2c17115e680c')
+
+// for reasons beyond my understanding, it seeams that be should hexify our data as it easier to deal with
+b'0a554b221e00482b02044f2503131a70531957685d555a2d121854250355026852115e2c17115e680c'
+
+// echo(xor_encrypt($plainText, $cypherText))
+// this is supposed to give us our key = 'qw8J'
+qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq
+// Then we can reverse ingineer it and look for the good cypherText
+$good_data = array( "showpassword"=>"yes", "bgcolor"=>"#ffffff");
+$good_plainText = json_encode($good_data);
+$good_cypherText = xor_encrypt($good_plainText, $key);
+echo($good_cypherText)
+UK"H+O%pS]9S[(W&pST^,^,S
+"// From the file, we have to then base64_encode it  
+function saveData($d) {
+    setcookie("data", base64_encode(xor_encrypt(json_encode($d))));
+}
+//
+$cookie = base64_encode($good_cypherText);
+echo($cookie);
+ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK
+// Now that we have the data, we have to send it with the cookie, see natas.py
+EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3<br>
