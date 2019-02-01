@@ -19,3 +19,5 @@ content = response.text
 
 print(content)
 # print(re.findall('The password for natas9 is (.*)', content))
+
+# PHP Remote Code Execution File Upload
