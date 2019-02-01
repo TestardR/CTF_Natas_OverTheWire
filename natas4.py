@@ -15,3 +15,5 @@ content = response.text
 
 print(content)
 print(re.findall('The password for natas5 is(.*)', content))
+
+# HTTP Headers & Cookies

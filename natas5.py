@@ -16,3 +16,4 @@ content = response.text
 print(content)
 print(session.cookies['loggedin'])
 
+# HTTP Headers & Cookies
