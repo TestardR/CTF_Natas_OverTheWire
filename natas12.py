@@ -17,3 +17,5 @@ content = response.text
 
 print(content)
 # print(re.findall('The password for natas9 is (.*)', content))
+
+#  File Upload Remote Code Executio
