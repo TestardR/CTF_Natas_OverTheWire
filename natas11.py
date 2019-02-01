@@ -17,8 +17,10 @@ session = requests.Session()
 # data = base64.b64decode(urllib.parse.unquote(session.cookies['data']))
 # print(binascii.b2a_hex(data))
 
+# PHP XOR
+
 cookies = {"data": "ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK"}
 
-response = session.get(url, auth=(username, password), cookies = cookies)
+response = session.get(url, auth=(username, password), cookies=cookies)
 
 print(response.text)
