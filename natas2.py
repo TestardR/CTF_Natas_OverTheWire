@@ -13,3 +13,5 @@ content = response.text
 
 # print(content)
 print(re.findall('natas3:(.*)', content))
+
+# robots.txt & Directory indexing
