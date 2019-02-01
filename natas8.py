@@ -16,4 +16,4 @@ content = response.text
 print(content)
 print(re.findall('The password for natas9 is (.*)', content))
 
-# PHP Base64 & Hex
+# PHP Base64 & Hex.
