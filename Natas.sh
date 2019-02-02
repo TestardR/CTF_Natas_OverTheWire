@@ -248,3 +248,22 @@ if ('user exists' in content):
             seen_password.append(ch)
             break
 WaIHEacj63wnNIBROHeqi3p9t0m5nhmh
+
+lvl 16 --> lvl 17
+http://natas16.natas.labs.overthewire.org/
+natas16
+WaIHEacj63wnNIBROHeqi3p9t0m5nhmh
+// The point of this level is to process a Blind Grep 
+// We can pass data through an input checking if our data feets into a dictionnary.txt
+// Blacklisting of several characters, see code.
+// $key is passed in double quotes, it is isolated as its own argument
+// $() allows for command substitution, we can send commands throug it 
+anything$(grep ^b /etc/natas_webpass/natas17)
+// anything allows us to get some data back from dictionary.txt
+// grep ^b, the carrot is a regular expression meaning the very first character (b is the first character)
+// if there is an answer, it means that b is the first charac
+
+// This idea is to loop though an alphabet, and grep each value of this alphabet from what is in the file
+// If grep returns true, we have match and can append each of the letter found in a variable called password
+8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw
+
