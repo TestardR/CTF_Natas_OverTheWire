@@ -10,7 +10,7 @@ import binascii
 username = 'natas11'
 password = 'U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK'
 
-url = 'http://%s.natas.labs.overthewire.org/' % username
+url = f'http://{username}.natas.labs.overthewire.org/'
 
 session = requests.Session()
 
@@ -19,8 +19,11 @@ session = requests.Session()
 
 # PHP XOR
 
-cookies = {"data": "ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK"}
-
-response = session.get(url, auth=(username, password), cookies=cookies)
+# cookies = {"data": "ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK"}
+# response = session.get(url, auth=(username, password), cookies=cookies)
+response = session.get(url + 'index-source.html', auth=(username, password))
+content = response.text
+output = open('output.html', 'w')
+output.write(content)
 
 print(response.text)
