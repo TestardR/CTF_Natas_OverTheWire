@@ -267,7 +267,8 @@ anything$(grep ^b /etc/natas_webpass/natas17)
 // If grep returns true, we have match and can append each of the letter found in a variable called password
 8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw
 
-lvl 17 --> lvl 18
+lvl 17 --> lvl 18 
+// note Their SQL database did not seem to work 
 http://natas17.natas.labs.overthewire.org/
 natas17
 8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw
@@ -301,4 +302,9 @@ while ( len(seen_password) < 32 ):
 			break
         print(content)
 //
+xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP
+
+lvl 18 --> lvl 19
+http://natas18.natas.labs.overthewire.org/
+natas18
 xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP
