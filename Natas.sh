@@ -54,7 +54,7 @@ http://natas6.natas.labs.overthewire.org/
 natas6
 aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
 // The point of this level is to find a secret password to add in an input
-// Looking at the source code we see and index-source.html
+// Looking at the source code we see an index-source.html
 http://natas6.natas.labs.overthewire.org/index-source.html
 // once inside it, we see a php conditional <? code ?>. It states : include "includes/secret.inc"
 // Taking a look at this file :  http://natas6.natas.labs.overthewire.org/includes/secret.inc
