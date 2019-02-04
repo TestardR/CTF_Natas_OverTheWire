@@ -10,11 +10,14 @@ print(characters)
 username = 'natas15'
 password = 'AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J'
 
-url = 'http://%s.natas.labs.overthewire.org/' % username
+url = f'http://{username}.natas.labs.overthewire.org/' 
 
 
 session = requests.Session()
-# response = session.get(url, auth=(username, password))
+# response = session.get(url + 'index-source.html', auth=(username, password))
+# content = response.text
+# output = open('output.html', 'w')
+# output.write(content)
 
 seen_password = list()
 while True:
@@ -34,7 +37,7 @@ while True:
 
         
 
-        # print(content)
+print(content)
 
 
 
