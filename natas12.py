@@ -6,7 +6,7 @@ import re
 username = 'natas12'
 password = 'EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3'
 
-url = 'http://%s.natas.labs.overthewire.org/' % username
+url = f'http://{username}.natas.labs.overthewire.org/' % username
 
 # response = requests.get(url + 'index-source.html', auth=(username, password))
 # response = requests.post(url, files={'uploadedfile': open('natas12.php', 'rb')}, data={
