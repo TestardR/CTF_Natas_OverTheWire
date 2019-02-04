@@ -6,7 +6,7 @@ import re
 username = 'natas13'
 password = 'jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY'
 
-url = 'http://%s.natas.labs.overthewire.org/' % username
+url = f'http://{username}.natas.labs.overthewire.org/' 
 
 
 session = requests.Session()
