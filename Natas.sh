@@ -433,4 +433,19 @@ if(array_key_exists("revelio", $_GET)) {
 esponse = session.get(url, auth=(username, password), allow_redirects = False)
 // D0vlad33nQF0Hz2EP255TP5wSW9ZsRSE
 
-# Disallow Redirects
+lvl 23 --> lvl 24
+http://netas23.natas.labs.overthewire.org/
+netas23
+D0vlad33nQF0Hz2EP255TP5wSW9ZsRSE
+// The point of this level is to manipulate PHP Type. 
+// See the code below :
+if(strstr($_REQUEST["passwd"],"iloveyou") && ($_REQUEST["passwd"] > 10 )){
+            echo "<br>The credentials for the next level are:<br>";
+            echo "<pre>Username: natas24 Password: <censored></pre>";
+}
+// We have to find a passw match a string 'iloveyou' and being > to the number 10
+// PHP uses dynamic type setting according to context, it does not rquire explicit type support.
+// So we have to set passwd to '11iloveyou', 11 will be interpreted as a Number, then iloveyou as a String
+// OsRmXFguozKpTZZ5X14zNO43379LZveg
+
+lvl 24 --> lvl 25
