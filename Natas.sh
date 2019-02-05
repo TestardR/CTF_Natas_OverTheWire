@@ -389,6 +389,7 @@ eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF
 // the most important part is the myread() and mywrite(). Especially in mywrite(), it is writing each $key and $value pair with a new line. We know from print_credentials(), we need a $key and $value pair of “admin” and 1 to get access to the next password. If we add a line “admin 1” in the file, the myread() function will read it out with no problem. So our input must be include “admin 1” on a newline. 
 
 // See the following python code
+// Two requests as we establish the session and then request it
 response = session.post(
     url, data={'name': 'test\nadmin 1'}, auth=(username, password))
 content = response.text
