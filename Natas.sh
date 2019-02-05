@@ -345,4 +345,57 @@ for i in range(641):
         print(content)
     else:
         print('Still trying', i)
-// eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF</pre></div>
+// eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF
+
+lvl 20 --> lvl 21
+http://natas20.natas.labs.overthewire.org/
+natas20
+eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF
+// As soon as you login to the level, you are greeted with a message saying that “You are logged in as a regular user. Login as an admin to retrieve credentials for natas21”.
+// Looking at the source code we see a lot of code
+
+1. debug($msg) just turn on debug. You can try it by adding “/index.php?debug” at the end of the url and hit enter to see the debug messages, $msg.
+
+2. print_credentials()  will print natas21 username and password if the following conditionals are satisfied:
+    a. $_SESSION is true if there is an existing session. The array $_SESSION is not empty.
+    b. array_key_exists(“admin”, $_SESSION) is true if “admin” key is set in $_SESSION.
+    c. $_SESSION[“admin”] == 1 is true if the value associated with the key “admin” in $_SESSION is set to 1
+
+3. myopen($path, $name) always return true.
+
+4. myclose() always return true.
+
+5. myread($sid) has several parts.
+    a. The first if(strspn….) statement check if the $sid contains characters that is within the long string of characters. If it is not, return “Invalid SID”. Otherwise, continue.
+    b. Then, it check to see if the path exist for the file call /mysess_$sid. For example, if $sid is abcdefg, it is checking for the file mysess_abcdefg. If the file exist, continue.
+    c. Here, we see that the content of the file is save in $data and the foreach loop take each new line of $data and put it in $line. Then, it takes each space separated word in each $line and put them in an array call $parts. If the first part ($parts[0]) is not an empty string, then it will use the first part as the session key and the second part ($parts[1]) as the value corresponding to that key.
+
+6. mywrite($sid, $data) also has several parts.
+    a. The first if(strspn …) does the same check for valid $sid in myread()
+    b. The same $filename is created using the $sid
+    c. The key is sorted in $_SESSION and the foreach loop take the pair of $key and corresponding $value and add it as a new line in $data. The $data is then write to the $filename.
+
+7. mydestroy($sid) always return true.
+
+8. mygarbage($t) always return true
+
+9. main interface does the following:
+    a. session_start().
+    b. check name is in the $_REQUEST, if so, set the $_SESSION[“name”] to $_REQUEST[“name”]. If we input “test” as a name, it will correspond “test” as the print_credentials()
+    c. set $name to empty string and check if “name” is in the $_SESSION, if so, set the variable $name to $_SESSION[“name”]
+
+// the most important part is the myread() and mywrite(). Especially in mywrite(), it is writing each $key and $value pair with a new line. We know from print_credentials(), we need a $key and $value pair of “admin” and 1 to get access to the next password. If we add a line “admin 1” in the file, the myread() function will read it out with no problem. So our input must be include “admin 1” on a newline. 
+
+// See the following python code
+response = session.post(
+    url, data={'name': 'test\nadmin 1'}, auth=(username, password))
+content = response.text
+print(content)
+print('='*80)
+
+response = session.get(url, auth=(username, password))
+content = response.text
+print(content)
+print('='*80)
+
+// IFekPyrQXftziDEsUr3x21sYuahypdgJ</pre>
