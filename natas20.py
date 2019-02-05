@@ -23,3 +23,5 @@ print('='*80)
 
 output = open('output.html', 'w')
 output.write(content)
+
+# busing PHP Session Handlers

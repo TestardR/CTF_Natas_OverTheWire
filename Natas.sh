@@ -351,6 +351,8 @@ lvl 20 --> lvl 21
 http://natas20.natas.labs.overthewire.org/
 natas20
 eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF
+// The point of this level is to inject data through a PHP Sesson Handler for role elevation
+
 // As soon as you login to the level, you are greeted with a message saying that “You are logged in as a regular user. Login as an admin to retrieve credentials for natas21”.
 // Looking at the source code we see a lot of code
 
