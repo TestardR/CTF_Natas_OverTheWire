@@ -17,4 +17,3 @@ print('='*80)
 output = open('output.html', 'w')
 output.write(content)
 
-# Disallow Redirects
